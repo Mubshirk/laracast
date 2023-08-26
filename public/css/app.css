@@ -22,3 +22,9 @@ article + article {
 h3{
     margin-top: 80px;
 }
+
+a{
+    text-decoration: wavy;
+    color: aliceblue;
+
+}
