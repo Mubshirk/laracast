@@ -10,7 +10,7 @@
 <body>
 
     <article>
-        <h1> <a href="/post">My First Post</a></h1>
+        <h1> <a href="/posts/my-third-post">My First Post</a></h1>
 
         <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate eveniet hic rerum, cupiditate nisi aliquam fuga minima deserunt similique dolore, qui eum corrupti. Suscipit unde voluptas, nesciunt reiciendis possimus praesentium. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam quasi omnis explicabo ad esse natus, blanditiis a repellendus accusamus sed impedit totam aliquid rerum temporibus? Perspiciatis nihil impedit at dignissimos.

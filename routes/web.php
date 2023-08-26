@@ -31,9 +31,8 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 ////////////////////////////////
 
-Route::get('/post', function () {
-
-    return view('post');
+Route::get('/posts/{post}', function ($post) {
+    return view('post',['post' => file_get_contents(base_path("resources/views/posts/{$post}.html"))]);
 });
 
 
