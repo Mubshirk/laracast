@@ -32,7 +32,11 @@ require __DIR__.'/auth.php';
 ////////////////////////////////
 
 Route::get('/posts/{post}', function ($post) {
+
+
     return view('post',['post' => file_get_contents(base_path("resources/views/posts/{$post}.html"))]);
+
+    
 });
 
 
