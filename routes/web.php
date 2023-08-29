@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Post;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('posts');
+
+
+    return view('posts',[
+        'posts' => Post::allu()
+    ]);
 });
 
 Route::get('/dashboard', function () {
@@ -31,13 +35,14 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 ////////////////////////////////
 
-Route::get('/posts/{post}', function ($post) {
+Route::get('/posts/{slug}', function ($slug) {
 
+    return view('post',[
+        'post' => Post::find($slug)
+    ]);
 
-    return view('post',['post' => file_get_contents(base_path("resources/views/posts/{$post}.html"))]);
+})->where('slug','[A-z_\-]+');
 
-    
-});
-
+   
 
 
