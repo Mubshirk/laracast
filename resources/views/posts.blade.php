@@ -12,7 +12,7 @@
     <?php foreach($posts as $post): ?>
 
     <article>
-         <?php $post; ?>
+         <?php echo $post; ?>
     </article>
     <?php  endforeach; ?>
 </body>
