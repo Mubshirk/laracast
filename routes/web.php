@@ -54,7 +54,7 @@ Route::get('/', function () {
     // },$files);
 
     return view('posts',[
-        'posts' => $posts
+        'posts' => Post::allu()
     ]);
 });
 
@@ -73,11 +73,12 @@ require __DIR__.'/auth.php';
 
 Route::get('/posts/{slug}', function ($slug) {
 
+
     return view('post',[
-        'post' => Post::find($slug)
+        'post' => Post::findOrFail($slug)
     ]);
 
-})->where('slug','[A-z_\-]+');
+});
 
    
 

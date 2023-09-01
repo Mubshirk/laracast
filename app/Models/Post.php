@@ -36,8 +36,10 @@ class Post extends Model
 
 
     public static function allu(){
-        
-        return collect(File::files(resource_path("posts/")))
+
+        return cache()->rememberForever('post.all',function(){
+
+            return collect(File::files(resource_path("posts/")))
         ->map(fn($file)=> YamlFrontMatter::parseFile($file))
         ->map(fn($document) => new Post(
              $document->title,
@@ -46,15 +48,29 @@ class Post extends Model
              $document->body(),
              $document->slug
             )
-         );
+         )
+         ->sortByDesc('date');
+
+        });
+        
+        
     
     }
 
     public static function find($slug){
 
-         return static::allu()->firstWhere('slug',$slug);
-
-         
+        return static::allu()->firstWhere('slug',$slug);
 
     }
+
+    public static function findOrFail($slug){
+
+        $post = static::find($slug);
+
+        if(! $post){
+            throw new ModelNotFoundException();
+        }
+
+        return $post;
+   }
 }
