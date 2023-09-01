@@ -10,9 +10,16 @@
 
 <h3><a href="/"><-- Go Back</a></h3>
 
+    <article>
 
-        {!!$post!!}
 
-    
+     <h1><?php echo $post->title; ?></h1>
+
+     <div>
+        <?php echo $post->body; ?>
+     </div>
+
+     </article>
+
 </body>
 </html>

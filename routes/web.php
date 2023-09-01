@@ -18,33 +18,44 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('/', function () {
 
-    $files = File::files(resource_path("posts/"));
-
-    $post = [];
-    
-
-    foreach($files as $file){
-       $document[] = YamlFrontMatter::parseFile($file);
-
-       $post[] = new Post(
-        $document->title,
-        $document->excerpt,
-        $document->date,
-        $document->body()
-       );
-
-    }
-
-    dd($post);
+    $posts = Post::allu();
 
 
 
 
+    // collect funtion of laravel 
+
+    // $posts = collect(File::files(resource_path("posts/")))
+    // ->map(fn($file)=> YamlFrontMatter::parseFile($file))
+    // ->map(fn($document) => new Post(
+    //      $document->title,
+    //      $document->excerpt,
+    //      $document->date,
+    //      $document->body(),
+    //      $document->slug
+    //     )
+    //  );
 
 
-    // return view('posts',[
-    //     'posts' => Post::allu()
-    // ]);
+
+    //  arry map 
+
+    // $posts = array_map( function($file){
+
+    //    $document = YamlFrontMatter::parseFile($file);
+
+    //    return new Post(
+    //     $document->title,
+    //     $document->excerpt,
+    //     $document->date,
+    //     $document->body(),
+    //     $document->slug
+    //    );
+    // },$files);
+
+    return view('posts',[
+        'posts' => $posts
+    ]);
 });
 
 Route::get('/dashboard', function () {
