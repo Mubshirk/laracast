@@ -1,6 +1,8 @@
 <?php
 use App\Models\Post;
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
@@ -18,7 +20,6 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('/', function () {
 
-    $posts = Post::allu();
 
 
 
@@ -53,8 +54,10 @@ Route::get('/', function () {
     //    );
     // },$files);
 
+        // dekh yahaa pr ... mene allu() nhi call kiya .. sirf all().. or ye dikharha he k mene allu() call kiya he
+
     return view('posts',[
-        'posts' => Post::allu()
+        'posts' => Post::latest()->with('category')->get()
     ]);
 });
 
@@ -71,15 +74,25 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 ////////////////////////////////
 
-Route::get('/posts/{slug}', function ($slug) {
+Route::get('/posts/{slug:slug}', function (Post $slug) {
+
+    
 
 
     return view('post',[
-        'post' => Post::findOrFail($slug)
+        'post' => $slug
     ]);
 
 });
 
+Route::get('categories/{category:slug}', function(Category $category){
+
+
+    return view('posts',[
+        'posts' => $category->posts
+    ]);
+    
+});
    
 
 

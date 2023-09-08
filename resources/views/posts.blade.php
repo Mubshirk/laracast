@@ -1,15 +1,26 @@
 <x-layouts>
 
+    <h3><a href="/"><-- Go Back..</a></h3>
+
     @foreach($posts as $post)
 
     <article>
+
         <h1> <a href="/posts/{{ $post->slug }}"> 
             <?php echo $post->title ?> </h1>
             </a>
+
+
+            <p>
+            <a href="/categories/{{$post->category->slug}}">{{$post->category->name}}</a>
+            </p>
+
+
         <div>
-            
-            {{ $post->excerpt }}
+            {{ $post->excertp }}
         </div>
+
+
     </article>
     @endforeach
 
