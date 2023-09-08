@@ -9,7 +9,7 @@
      <h1>{{$post->title}}</h1>
 
 
-     <p>Written by <a href="#">{{ $post->user->name }}</a></p>
+     <p>Written by <a href="/aurthers/{{ $post->aurther->username }}">{{ $post->aurther->name }}</a></p>
 
      <p>
 
