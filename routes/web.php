@@ -1,12 +1,10 @@
 <?php
-use App\Models\Post;
+
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +23,7 @@ Route::get('/', function () {
 
 
 
-    // collect funtion of laravel 
+    // collect funtion of laravel
 
     // $posts = collect(File::files(resource_path("posts/")))
     // ->map(fn($file)=> YamlFrontMatter::parseFile($file))
@@ -40,7 +38,7 @@ Route::get('/', function () {
 
 
 
-    //  arry map 
+    //  arry map
 
     // $posts = array_map( function($file){
 
@@ -58,7 +56,8 @@ Route::get('/', function () {
         // dekh yahaa pr ... mene allu() nhi call kiya .. sirf all().. or ye dikharha he k mene allu() call kiya he
 
     return view('posts',[
-        'posts' => Post::latest()->get()
+        'posts' => Post::latest()->get(),
+        'categories' => Category::all()
     ]);
 });
 
@@ -77,7 +76,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/posts/{slug:slug}', function (Post $slug) {
 
-    
+
 
 
     return view('post',[
@@ -91,18 +90,21 @@ Route::get('categories/{category:slug}', function(Category $category){
 
     return view('posts',[
         'posts' => $category->posts
+
     ]);
-    
+
 });
 
-Route::get('aurthers/{aurther:username}', function(User $aurther){
+Route::get('authors/{author:username}', function(User $author){
 
 
     return view('posts',[
-        'posts' => $aurther->posts
+        'posts' => $author->posts
     ]);
-    
+
 });
-   
+
+Route::view('index','index');
+
 
 

@@ -10,15 +10,17 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $with = ['category' , 'aurther'];
+    protected $with = ['category', 'author'];
 
     protected $guarded = [];
 
-    public function category(){
+    public function category(): BelongsTo
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function aurther(){
+    public function author(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 }
