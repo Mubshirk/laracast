@@ -26,10 +26,8 @@
                             </div>
                         </header>
 
-                        <div class="text-sm mt-2">
-                            <p>
-                              {{ $post->excertp }}
-                            </p>
+                        <div class="text-sm mt-2 space-y-4">
+                            {!! $post->excertp !!}
                         </div>
 
                         <footer class="flex justify-between items-center mt-8">

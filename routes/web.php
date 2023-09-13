@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-
-
+Route::get('/',[PostController::class,'index']);
 
 
 
@@ -55,11 +55,7 @@ Route::get('/', function () {
 
         // dekh yahaa pr ... mene allu() nhi call kiya .. sirf all().. or ye dikharha he k mene allu() call kiya he
 
-    return view('posts',[
-        'posts' => Post::latest()->get(),
-        'categories' => Category::all()
-    ]);
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -74,18 +70,11 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 ////////////////////////////////
 
-Route::get('/posts/{slug:slug}', function (Post $slug) {
+Route::get('/posts/{post:slug}',[PostController::class,'show']);
 
+/*  we no longer need this but just for reminder that that we have done it in this way as well
 
-
-
-    return view('post',[
-        'post' => $slug
-    ]);
-
-});
-
-Route::get('categories/{category:slug}', function(Category $category){
+ * Route::get('categories/{category:slug}', function(Category $category){
 
 
     return view('posts',[
@@ -94,9 +83,9 @@ Route::get('categories/{category:slug}', function(Category $category){
         'categories' => Category::all()
 
 
-    ]);
+    ]);*/
 
-});
+//});
 
 Route::get('authors/{author:username}', function(User $author){
 
