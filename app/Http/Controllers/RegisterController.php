@@ -14,16 +14,18 @@ class RegisterController extends Controller
 
     public function store(){
         $attributes = request()->validate([
-            'name' => 'required|max:50',
-            'username' => 'required|max:50|min:4',
-            'email' => 'required|email|max:50|min:5',
+            'name' => 'required|min:4|max:50',
+            'username' => 'required|max:50|min:4|unique:users,username',
+            'email' => 'required|email|max:50|min:5|unique:users,email',
             'password' => 'required|max:50|min:7'
 
         ]);
 
 
-        User::create($attributes);
+        $user = User::create($attributes);
 
-        return '<a href="/"> congratulations </a>';
+        auth()->login($user);
+
+        return redirect('/')->with('success', 'Your account has been created.');
     }
 }
