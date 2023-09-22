@@ -34,6 +34,13 @@ class Post extends Model
 
     protected $guarded = [];
 
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
