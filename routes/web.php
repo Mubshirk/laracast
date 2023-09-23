@@ -10,6 +10,11 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\NewsletterController;
+
+use \App\services\Newsletter;
+use \Illuminate\Validation\ValidationException;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,43 +27,12 @@ use App\Http\Controllers\SessionController;
 |
 */
 
-Route::get('/',[PostController::class,'index']);
 
 
-
-    // collect funtion of laravel
-
-    // $posts = collect(File::files(resource_path("posts/")))
-    // ->map(fn($file)=> YamlFrontMatter::parseFile($file))
-    // ->map(fn($document) => new Post(
-    //      $document->title,
-    //      $document->excerpt,
-    //      $document->date,
-    //      $document->body(),
-    //      $document->slug
-    //     )
-    //  );
+Route::get('/', [PostController::class, 'index']);
 
 
-
-    //  arry map
-
-    // $posts = array_map( function($file){
-
-    //    $document = YamlFrontMatter::parseFile($file);
-
-    //    return new Post(
-    //     $document->title,
-    //     $document->excerpt,
-    //     $document->date,
-    //     $document->body(),
-    //     $document->slug
-    //    );
-    // },$files);
-
-        // dekh yahaa pr ... mene allu() nhi call kiya .. sirf all().. or ye dikharha he k mene allu() call kiya he
-
-
+///////////////////////////////
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -70,34 +44,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 ////////////////////////////////
 
-Route::get('/posts/{post:slug}',[PostController::class,'show']);
+Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
-/*  we no longer need this but just for reminder that that we have done it in this way as well
+Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 
- * Route::get('categories/{category:slug}', function(Category $category){
+Route::get('/login', [SessionController::class, 'create'])->middleware('guest');
+Route::post('/login', [SessionController::class, 'store'])->middleware('guest');
+Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth');
 
+Route::post('posts/{post:slug}/comments', [PostCommentController::class, 'store']);
 
-    return view('posts',[
-        'posts' => $category->posts,
-        'currentCategory' => $category,
-        'categories' => Category::all()
+Route::post('/newsletter',NewsletterController::class);
 
-
-    ]);*/
-
-//});
-
-Route::get('/register',[RegisterController::class,'create'])->middleware('guest');
-Route::post('/register',[RegisterController::class,'store'])->middleware('guest');
-
-Route::get('/login',[SessionController::class,'create'])->middleware('guest');
-Route::post('/login',[SessionController::class,'store'])->middleware('guest');
-Route::post('/logout',[SessionController::class,'destroy'])->middleware('auth');
-
-Route::post('posts/{post:slug}/comments',[PostCommentController::class,'store']);
 
 
 
