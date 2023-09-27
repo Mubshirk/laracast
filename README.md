@@ -7,6 +7,10 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+##About This Project
+
+In this project you cannot create an admin account , admin account is already defined in the AppServiceProvider file , in order to to accesss admin account and publish posts , edit posts , delete posts ? you have to logged in the admin account and then click on your right top corner of screen " Welcome , {{ $user->name }} !!" and you will see a dropedown . There you can select the action you want . The subscription of this project's news are currently unavailable due to few buggs which will be fixed as soon as possible . The mail site (Mailchimp) is currently crashed. Thank you for giving attetion , have a nice day ahead dear reader!!
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
