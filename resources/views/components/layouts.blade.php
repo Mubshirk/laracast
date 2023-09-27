@@ -16,29 +16,38 @@
 <body style="font-family: Open Sans, sans-serif">
 <section class="px-6 py-8">
     <nav class="md:flex md:justify-between md:items-center">
-        <div>
+        <div class="flex inline-flex justify-between">
             <a href="/">
-                <img src="/images/logo.svg" alt="Laracasts Logo" width="165" height="16">
+                <p class="font-bold text-2xl inline-flex" style="color:#4A4A4A">My -</p> <img class="inline-flex mb-1.5" src="/images/logo.svg" alt="Laracasts Logo" width="165" height="16">
             </a>
         </div>
 
         <div class="mt-8 md:mt-0 flex items-center">
 
             @auth()
-                <span class="text-sm font-bold uppercase">
-                        Welcome <span class="text-blue-500">
+
+                <x-welcome-dropedown>
+                    <x-slot name="btn">
+                        <button class="text-sm font-bold uppercase">
+                            Welcome <span class="text-blue-500">
                             {{ auth()->user()->name }}
                             </span>
-                        !!
-                    </span>
+                            !!
+                        </button>
+                    </x-slot>
+                    <li class="hover:text-blue-600 ml-4 text-sm transition-all w-full"><a href="#"
+                                                                                          x-data="{}"
+                                                                                          @click="document.querySelector('#logout-form').submit()">Log
+                            Out</a></li>
+                    @can('admin')
+                        <x-sidebar/>
+                    @endcan
 
-                <form method="POST" action="/logout">
+
+                </x-welcome-dropedown>
+
+                <form id="logout-form" method="POST" class="hidden" action="/logout">
                     @csrf
-                    <button
-                        type="submit"
-                        class="bg-blue-500 text-white font-bold text-xs ml-6 p-3 rounded-full">
-                        Logout
-                    </button>
                 </form>
 
             @else

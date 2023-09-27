@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -27,40 +28,38 @@ use \Illuminate\Validation\ValidationException;
 |
 */
 
-
-
-Route::get('/', [PostController::class, 'index']);
-
-
-///////////////////////////////
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::controller(PostController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/posts/{post:slug}', 'show');
 });
-
-require __DIR__ . '/auth.php';
-////////////////////////////////
-
-Route::get('/posts/{post:slug}', [PostController::class, 'show']);
-
-Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
-
-Route::get('/login', [SessionController::class, 'create'])->middleware('guest');
-Route::post('/login', [SessionController::class, 'store'])->middleware('guest');
-Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth');
 
 Route::post('posts/{post:slug}/comments', [PostCommentController::class, 'store']);
 
-Route::post('/newsletter',NewsletterController::class);
+Route::post('/newsletter',NewsletterController::class)->name('newsletter');
 
 
+Route::middleware('guest')->group(function () {
+    Route::prefix('/login')->controller(SessionController::class)->group(function () {
+        Route::get('/', 'create');
+        Route::post('/', 'store');
+    });
+    Route::get('/login', [SessionController::class, 'create']);
+    Route::post('/login', [SessionController::class, 'store']);
 
+    Route::prefix('/register')->controller(RegisterController::class)->group(function () {
+        Route::get('/', 'create');
+        Route::post('/', 'store');
+    });
+});
 
+Route::post('/logout', [SessionController::class, 'destroy']);
+
+Route::controller(AdminPostController::class)->prefix('admin')->middleware('can:admin')->group(function (){
+    Route::post('/posts','store');
+    Route::get('/posts','index');
+    Route::get('/create/post','create');
+    Route::get('/post/{post}/edit','edit');
+    Route::patch('/post/{post}','update');
+    Route::delete('/post/{post}','destroy');
+});
 
