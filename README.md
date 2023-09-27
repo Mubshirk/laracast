@@ -11,6 +11,11 @@
 
 In this project you cannot create an admin account , admin account is already defined in the AppServiceProvider file , in order to to accesss admin account and publish posts , edit posts , delete posts ? you have to logged in the admin account and then click on your right top corner of screen " Welcome , {{ $user->name }} !!" and you will see a dropedown . There you can select the action you want . The subscription of this project's news are currently unavailable due to few buggs which will be fixed as soon as possible . The mail site (Mailchimp) is currently crashed. Thank you for giving attetion , have a nice day ahead dear reader!!
 
+Admin account info.
+
+whenever you wish to create admin account, the username must be "mubashirk" , then your account will become Admin Account.
+ATTENTION!! The username must be unique , infact , you cannot have two or more admins , until you change the setting manually in AppServiceProvide file.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
