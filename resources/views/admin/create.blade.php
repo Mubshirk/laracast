@@ -7,30 +7,9 @@
             <h1 class="text-blue-500 font-bold text-xl text-center mb-7">PUBLISH NEW POST</h1>
             <form action="/admin/posts" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-6">
-                    <label for="title"
-                           class="font-semibold text-gray-500 ">Title</label>
+                <x-form-input label="title" />
+                <x-form-input label="slug" />
 
-                    <input
-                        value="{{ old('title') }}"
-                        name="title" id="title" placeholder="Write title of the post.."
-                        class="w-full h-9 border border-gray-500 rounded-lg p-4">
-                    @error('title')
-                    <span class="text-xs text-red-500 font-semibold">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="mb-6">
-                    <label for="slug"
-                           class="font-semibold text-gray-500 ">Slug</label>
-                    <input
-                        value="{{ old('slug') }}"
-                        name="slug" id="slug" placeholder="Write slug of the post.."
-                        class="w-full h-9 border border-gray-500 rounded-lg p-4">
-                    @error('slug')
-                    <span class="text-xs text-red-500 font-semibold">{{ $message }}</span>
-                    @enderror
-                </div>
 {{--                thumbnail --}}
                 <div class="mb-6 border border-gray-400 p-2 rounded-xl">
                     <label for="thumbnail"

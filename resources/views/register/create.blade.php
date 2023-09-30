@@ -6,97 +6,11 @@
             <form action="/register" method="POST"
             >
                 @csrf
-                {{--                Name--}}
-
-                <div class="mb-6">
-                    <label for="name"
-                           class="block mb-2 uppercase font-bold text-xs text-gray-700">
-                        Name
-                    </label>
-
-                    <input type="text"
-                           name="name"
-                           id="name"
-                           required
-                           value="{{ old('name') }}"
-                           placeholder="Write your Name.."
-                           class="border border-gray-400 p-2 w-full rounded-xl">
-
-                    @error('name')
-                    <p class="text-sm text-red-500 ">{{ $message }}</p>
-                    @enderror
-                </div>
-
-
-
-                {{--                 username--}}
-                <div class="mb-6">
-                    <label for="username"
-                           class="block mb-2 uppercase font-bold text-xs text-gray-700">
-                        Username
-                    </label>
-
-                    <input type="text"
-                           name="username"
-                           id="username"
-                           required
-                           value="{{ old('username') }}"
-                           placeholder="Write your Username.."
-                           class="border border-gray-400 p-2 w-full rounded-xl">
-                    @error('username')
-                    <p class="text-sm text-red-500 ">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                {{--                email --}}
-
-                <div class="mb-6">
-                    <label for="email"
-                           class="block mb-2 uppercase font-bold text-xs text-gray-700">
-                        Email-Address
-                    </label>
-
-                    <input type="text"
-                           name="email"
-                           id="email"
-                           required
-                           value="{{ old('email') }}"
-                           placeholder="Write your Email-Address.."
-                           class="border border-gray-400 p-2 w-full rounded-xl">
-
-                    @error('email')
-                    <p class="text-sm text-red-500 ">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                {{--                password --}}
-
-                <div class="mb-6">
-                    <label for="password"
-                           class="block mb-2 uppercase font-bold text-xs text-gray-700">
-                        Password
-                    </label>
-
-                    <input type="password"
-                           name="password"
-                           id="password"
-                           required
-                           placeholder="Write your Password.."
-                           class="border border-gray-400 p-2 w-full rounded-xl">
-
-                    @error('password')
-                    <p class="text-sm text-red-500 ">{{ $message }}</p>
-                    @enderror
-                </div>
-
-{{--                submit--}}
-
-                <div>
-                    <button
-                        class="px-4 py-2  bg-blue-500 text-gray-100 rounded-xl border border-blue-600 font-bold hover:bg-blue-600 transition-all focus:bg-green-600 focus:border-green-900
-                        ">
-                        Submit</button>
-                </div>
+                <x-form-input label="name" />
+                <x-form-input label="username" />
+                <x-form-input label="email" />
+                <x-form-input label="password" type="password" />
+                <x-form-button name="Submit" />
             </form>
         </main>
 

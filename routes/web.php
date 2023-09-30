@@ -43,8 +43,6 @@ Route::middleware('guest')->group(function () {
         Route::get('/', 'create');
         Route::post('/', 'store');
     });
-    Route::get('/login', [SessionController::class, 'create']);
-    Route::post('/login', [SessionController::class, 'store']);
 
     Route::prefix('/register')->controller(RegisterController::class)->group(function () {
         Route::get('/', 'create');
