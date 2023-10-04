@@ -59,5 +59,10 @@ Route::controller(AdminPostController::class)->prefix('admin')->middleware('can:
     Route::get('/post/{post}/edit','edit');
     Route::patch('/post/{post}','update');
     Route::delete('/post/{post}','destroy');
+    Route::delete('/user/{user}','destroyUser');
+    Route::get('/users','users');
+    Route::get('/comments','comments');
+    Route::delete('/comment/{comment}','destroyComment');
 });
+
 
